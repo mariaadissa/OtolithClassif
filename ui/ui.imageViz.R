@@ -1,55 +1,30 @@
 
-# tabPanel(title = "Visualisation",
-#          sidebarLayout(
-#            sidebarPanel(
-#              shinyFilesButton("img_btn", "Choose an image" ,
-#                               title = "Please select an image:", multiple = FALSE),
-#              verbatimTextOutput("img_text"),
-#              uiOutput("select.param")
-#            ),
-#          mainPanel(imageOutput("img_viz"),
-#                    dataTableOutput("data.table"),
-#                    verbatimTextOutput(("param.summary")),
-#                    plotlyOutput("boxplot")
-#                    ))
-#          )
-
-
 tabPanel(title = "Visualisation",
-         fluidRow(
-           column(width = 12,
-                  sidebarLayout(
-                    sidebarPanel(
-                      shinyFilesButton("img_btn", "Choose an image" ,
-                                       title = "Please select an image:", multiple = FALSE),
-                      verbatimTextOutput("img_text"),
-                      uiOutput("select.param")
-                    ),
-                    mainPanel(
-                      wellPanel(
-                        tabsetPanel(
-                          
-                          tabPanel(title = "Paramètres de l'image",
-                                   
-                                                   fluidRow(
-                                                     column(width = 4,imageOutput("img_viz"))
-                                                    
-                                                     
-                                                   ),
-                                                  fluidRow(
-                                                    column(width = 4, dataTableOutput("data.table"))
-                                                  )
-                          )
+         tabsetPanel(
+           tabPanel(title = "Image visualisation",
+                    sidebarLayout(
+                      sidebarPanel(
+                        shinyFilesButton("img_btn", "Choose an image" ,
+                                         title = "Please select an image:", multiple = FALSE),
+                        verbatimTextOutput("img_text")
+                      ),
+                      mainPanel(
+                        fluidRow(tableOutput("data.table")),
+                        imageOutput("img_viz")
+                        
                         )
+                    )),
+           tabPanel(title = "Parameters visualisation",
+                    sidebarLayout(
+                      sidebarPanel(
+                        uiOutput("select.param")
+                      ),
+                      mainPanel(
+                        fluidRow(column(width = 6, verbatimTextOutput("param.summary"))),
+                        fluidRow(plotlyOutput("boxplot"))
                       )
-                    )
-                  )
-           )
-         ),
-         fluidRow(
-           column(verbatimTextOutput(("param.summary")),width = 4),
-           column(plotlyOutput("boxplot"),width=8)
+                    ))
          )
          
-         
-)
+         )
+
