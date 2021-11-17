@@ -20,7 +20,7 @@
                     list(src = outfile, contentType = 'image/png',width = 400,height = 300,alt = "This is alternate text")
                 }, deleteFile = TRUE)
                 # table plot
-                output$data.table <- renderDataTable({
+                output$data.table <- renderTable({
                     row_from_path(file_selected$datapath,csv.data)
                 })
             }
