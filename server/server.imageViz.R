@@ -30,7 +30,7 @@
     # input 
     output$select.param <- renderUI({
         if (is.null(csv.data)) return(NULL)
-        df <- csv.data[,-c(1:3)]
+        df <- csv.data[,-c(1:4)]
         selectInput("select.param", "Select a parameter",names(df))
     })
     # param summary 
